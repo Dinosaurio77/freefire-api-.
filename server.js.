@@ -1,0 +1,25 @@
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+let partidas = [];
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('API de Free Fire funcionando!');
+});
+
+app.post('/api/partida', (req, res) => {
+  const data = req.body;
+  partidas.push(data);
+  res.status(201).send({ mensaje: 'Datos recibidos exitosamente' });
+});
+
+app.get('/api/partidas', (req, res) => {
+  res.send(partidas);
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
+});
